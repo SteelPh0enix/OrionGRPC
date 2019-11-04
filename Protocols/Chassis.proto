@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service ChassisService {
+    rpc Drive(stream ChassisData) returns (stream ChassisFeedback);
+}
+
+message ChassisData {
+    double x = 1;
+    double y = 2;
+}
+
+message ChassisFeedback {
+    int leftPower = 1;
+    int rightPower = 2;
+}
