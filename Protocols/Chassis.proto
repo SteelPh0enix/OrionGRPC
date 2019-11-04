@@ -10,6 +10,6 @@ message ChassisData {
 }
 
 message ChassisFeedback {
-    int leftPower = 1;
-    int rightPower = 2;
+    int32 leftPower = 1;
+    int32 rightPower = 2;
 }
