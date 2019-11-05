@@ -5,11 +5,13 @@ service ChassisService {
 }
 
 message ChassisData {
-    double x = 1;
-    double y = 2;
+    double velocity = 1;
+    double rotation = 2;
 }
 
 message ChassisFeedback {
     int32 leftPower = 1;
     int32 rightPower = 2;
+    double velocity = 3;
+    double rotation = 4;
 }
