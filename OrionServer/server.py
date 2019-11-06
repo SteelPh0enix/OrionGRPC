@@ -8,7 +8,7 @@ from orion_communicator import OrionCommunicator
 GRPC_SERVER_ADDRESS = '[::]'
 GRPC_SERVER_PORT = '16969'
 
-SERIAL_PORT_NAME = 'COM5'
+SERIAL_PORT_NAME = '/dev/ttyACM0'
 SERIAL_PORT_BAUDRATE = 115200
 
 
