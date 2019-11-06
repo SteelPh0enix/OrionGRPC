@@ -23,6 +23,7 @@ class ChassisServiceStub(object):
 
 class ChassisServiceServicer(object):
     # missing associated documentation comment in .proto file
+    pass
 
     def Drive(self, request_iterator, context):
         # missing associated documentation comment in .proto file

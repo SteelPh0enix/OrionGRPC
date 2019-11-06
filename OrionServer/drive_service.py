@@ -1,6 +1,6 @@
 from proto.Chassis_pb2_grpc import ChassisServiceServicer
 from proto.Chassis_pb2 import ChassisData, ChassisFeedback
-import json
+
 
 class DriveServicer(ChassisServiceServicer):
     def __init__(self, orion_comm):
@@ -12,10 +12,11 @@ class DriveServicer(ChassisServiceServicer):
             'ROT': request.rotation
         }
 
-
     def dict_to_response(self, response: dict) -> ChassisFeedback:
-        # TODO: You left it here.
-        return ChassisFeedback()
+        return ChassisFeedback(leftPower=response['LF'],
+                               rightPower=response['RF'],
+                               errorCode=response['ErrorCode'],
+                               errorDescription=response['ErrorDescription'])
 
     def Drive(self, request_iterator, context):
         for drive_request in request_iterator:
