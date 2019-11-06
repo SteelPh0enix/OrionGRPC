@@ -12,6 +12,6 @@ message ChassisData {
 message ChassisFeedback {
     int32 leftPower = 1;
     int32 rightPower = 2;
-    double velocity = 3;
-    double rotation = 4;
+    int32 errorCode = 5;
+    string errorDescription = 6;
 }
