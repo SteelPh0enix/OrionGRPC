@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rChassis.proto\"1\n\x0b\x43hassisData\x12\x10\n\x08velocity\x18\x01 \x01(\x01\x12\x10\n\x08rotation\x18\x02 \x01(\x01\"e\n\x0f\x43hassisFeedback\x12\x11\n\tleftPower\x18\x01 \x01(\x05\x12\x12\n\nrightPower\x18\x02 \x01(\x05\x12\x11\n\terrorCode\x18\x05 \x01(\x05\x12\x18\n\x10\x65rrorDescription\x18\x06 \x01(\t2=\n\x0e\x43hassisService\x12+\n\x05\x44rive\x12\x0c.ChassisData\x1a\x10.ChassisFeedback(\x01\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\rChassis.proto\"1\n\x0b\x43hassisData\x12\x10\n\x08velocity\x18\x01 \x01(\x01\x12\x10\n\x08rotation\x18\x02 \x01(\x01\"e\n\x0f\x43hassisFeedback\x12\x11\n\tleftPower\x18\x01 \x01(\x05\x12\x12\n\nrightPower\x18\x02 \x01(\x05\x12\x11\n\terrorCode\x18\x05 \x01(\x05\x12\x18\n\x10\x65rrorDescription\x18\x06 \x01(\t29\n\x0e\x43hassisService\x12\'\n\x05\x44rive\x12\x0c.ChassisData\x1a\x10.ChassisFeedbackb\x06proto3')
 )
 
 
@@ -142,7 +142,7 @@ _CHASSISSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   serialized_start=171,
-  serialized_end=232,
+  serialized_end=228,
   methods=[
   _descriptor.MethodDescriptor(
     name='Drive',

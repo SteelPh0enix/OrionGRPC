@@ -14,7 +14,7 @@ class ChassisServiceStub(object):
         Args:
           channel: A grpc.Channel.
         """
-        self.Drive = channel.stream_stream(
+        self.Drive = channel.unary_unary(
             '/ChassisService/Drive',
             request_serializer=Chassis__pb2.ChassisData.SerializeToString,
             response_deserializer=Chassis__pb2.ChassisFeedback.FromString,
@@ -25,7 +25,7 @@ class ChassisServiceServicer(object):
     # missing associated documentation comment in .proto file
     pass
 
-    def Drive(self, request_iterator, context):
+    def Drive(self, request, context):
         # missing associated documentation comment in .proto file
         pass
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -35,7 +35,7 @@ class ChassisServiceServicer(object):
 
 def add_ChassisServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-        'Drive': grpc.stream_stream_rpc_method_handler(
+        'Drive': grpc.unary_unary_rpc_method_handler(
             servicer.Drive,
             request_deserializer=Chassis__pb2.ChassisData.FromString,
             response_serializer=Chassis__pb2.ChassisFeedback.SerializeToString,

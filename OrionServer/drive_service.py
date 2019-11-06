@@ -8,8 +8,8 @@ class DriveServicer(ChassisServiceServicer):
 
     def request_to_dict(self, request: ChassisData) -> dict:
         return {
-            'VEL': request.velocity,
-            'ROT': request.rotation
+            'Y': request.velocity,
+            'X': request.rotation
         }
 
     def dict_to_response(self, response: dict) -> ChassisFeedback:
@@ -18,11 +18,8 @@ class DriveServicer(ChassisServiceServicer):
                                errorCode=response['ErrorCode'],
                                errorDescription=response['ErrorDescription'])
 
-    def Drive(self, request_iterator, context):
-        for drive_request in request_iterator:
-            request_json = self.request_to_dict(drive_request)
-            print("Request: {0}".format(request_json))
-            response_json = self.orion.send_json(
-                request_json)
-            print("Response: {0}".format(response_json))
-            yield self.dict_to_response(response_json)
+    def Drive(self, request, context):
+        request_json = self.request_to_dict(request)
+        response_json = self.orion.send_json(
+            request_json)
+        return self.dict_to_response(response_json)

@@ -20,7 +20,7 @@ def runserver():
     grpc_servicer = DriveServicer(orion_comm)
 
     print('Starting server...')
-    server = grpc.server(ThreadPoolExecutor(2))
+    server = grpc.server(ThreadPoolExecutor(4))
     add_ChassisServiceServicer_to_server(grpc_servicer, server)
     server.add_insecure_port('{0}:{1}'.format(
         GRPC_SERVER_ADDRESS, GRPC_SERVER_PORT))
