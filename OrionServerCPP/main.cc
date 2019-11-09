@@ -15,8 +15,18 @@
 
 using json = nlohmann::json;
 
+std::string const CHASSIS_SERIAL_PORT_NAME{"/dev/ttyACM0"};
+
 class DriveServer final : public ChassisService::Service {
     public:
+        DriveServer(std::string const& chassisPortName) {
+            chassisStream.Open(chassisPortName);
+            chassisStream.SetBaudRate(LibSerial::SerialStreamBuf::BAUD_115200);
+            chassisStream.SetCharSize(LibSerial::SerialStreamBuf::CHAR_SIZE_8);
+            chassisStream.SetFlowControl(LibSerial::SerialStreamBuf::FLOW_CONTROL_NONE);
+            chassisStream.SetParity(LibSerial::SerialStreamBuf::PARITY_NONE);
+        }
+
         virtual grpc::Status Drive(grpc::ServerContext* context, ChassisData const* request, ChassisFeedback* response) override {
             std::cout << "Got ChassisData: V:" << request->velocity() << ", R:" << request->rotation() << '\n';
             json outputJson;
@@ -24,20 +34,33 @@ class DriveServer final : public ChassisService::Service {
             outputJson["X"] = request->rotation();
             outputJson["Y"] = request->velocity();
 
-            auto jsonString = outputJson.dump() + '\n';
+            auto jsonString = outputJson.dump();
 
             std::cout << "Sending to chassis: " << jsonString << '\n';
+            chassisStream << jsonString << '\n';
+
+            // std::string chassisStringFeedback{"{\"ErrorCode\":123,\"ErrorDescription\":\"dupa\",\"LF\":123,\"RF\":456}"};
+            std::string chassisStringFeedback{};
+            std::getline(chassisStream, chassisStringFeedback);
+            std::cout << "Got feedback: " << chassisStringFeedback << '\n';
+
+            auto feedbackJson = json::parse(chassisStringFeedback);
+
+            response->set_errorcode(feedbackJson["ErrorCode"]);
+            response->set_errordescription(feedbackJson["ErrorDescription"]);
+            response->set_leftpower(feedbackJson["LF"]);
+            response->set_rightpower(feedbackJson["RF"]);
 
             return grpc::Status::OK;
         }
 
     private:
-
+        LibSerial::SerialStream chassisStream;
 };
 
 int main() {
     std::string server_address("0.0.0.0:5000");
-    DriveServer service;
+    DriveServer service(CHASSIS_SERIAL_PORT_NAME);
 
     grpc::ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());

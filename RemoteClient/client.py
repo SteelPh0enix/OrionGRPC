@@ -16,6 +16,7 @@ def run():
     with grpc.insecure_channel('{0}:{1}'.format(GRPC_SERVER_IP, GRPC_SERVER_PORT)) as channel:
         stub = ChassisServiceStub(channel)
         test_comms(stub)
+        stub.Drive(ChassisData(velocity=0,rotation=0))
 
 
 if __name__ == '__main__':
