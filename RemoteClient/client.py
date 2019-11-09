@@ -2,8 +2,8 @@ import grpc
 from proto.Chassis_pb2 import ChassisData, ChassisFeedback
 from proto.Chassis_pb2_grpc import ChassisServiceStub
 
-GRPC_SERVER_IP = 'localhost'
-GRPC_SERVER_PORT = '16969'
+GRPC_SERVER_IP = '0.0.0.0'
+GRPC_SERVER_PORT = '5000'
 
 
 def test_comms(stub):

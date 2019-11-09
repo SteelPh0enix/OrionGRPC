@@ -6,26 +6,32 @@
 
 #include "Chassis.pb.h"
 
-#include <grpc++/impl/codegen/async_stream.h>
-#include <grpc++/impl/codegen/async_unary_call.h>
-#include <grpc++/impl/codegen/method_handler_impl.h>
-#include <grpc++/impl/codegen/proto_utils.h>
-#include <grpc++/impl/codegen/rpc_method.h>
-#include <grpc++/impl/codegen/service_type.h>
-#include <grpc++/impl/codegen/status.h>
-#include <grpc++/impl/codegen/stub_options.h>
-#include <grpc++/impl/codegen/sync_stream.h>
+#include <functional>
+#include <grpcpp/impl/codegen/async_generic_service.h>
+#include <grpcpp/impl/codegen/async_stream.h>
+#include <grpcpp/impl/codegen/async_unary_call.h>
+#include <grpcpp/impl/codegen/client_callback.h>
+#include <grpcpp/impl/codegen/method_handler_impl.h>
+#include <grpcpp/impl/codegen/proto_utils.h>
+#include <grpcpp/impl/codegen/rpc_method.h>
+#include <grpcpp/impl/codegen/server_callback.h>
+#include <grpcpp/impl/codegen/service_type.h>
+#include <grpcpp/impl/codegen/status.h>
+#include <grpcpp/impl/codegen/stub_options.h>
+#include <grpcpp/impl/codegen/sync_stream.h>
 
 namespace grpc {
 class CompletionQueue;
 class Channel;
-class RpcService;
 class ServerCompletionQueue;
 class ServerContext;
 }  // namespace grpc
 
 class ChassisService final {
  public:
+  static constexpr char const* service_full_name() {
+    return "ChassisService";
+  }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
@@ -33,8 +39,19 @@ class ChassisService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ChassisFeedback>> AsyncDrive(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ChassisFeedback>>(AsyncDriveRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ChassisFeedback>> PrepareAsyncDrive(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ChassisFeedback>>(PrepareAsyncDriveRaw(context, request, cq));
+    }
+    class experimental_async_interface {
+     public:
+      virtual ~experimental_async_interface() {}
+      virtual void Drive(::grpc::ClientContext* context, const ::ChassisData* request, ::ChassisFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Drive(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ChassisFeedback* response, std::function<void(::grpc::Status)>) = 0;
+    };
+    virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ChassisFeedback>* AsyncDriveRaw(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ChassisFeedback>* PrepareAsyncDriveRaw(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -43,11 +60,28 @@ class ChassisService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ChassisFeedback>> AsyncDrive(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ChassisFeedback>>(AsyncDriveRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ChassisFeedback>> PrepareAsyncDrive(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ChassisFeedback>>(PrepareAsyncDriveRaw(context, request, cq));
+    }
+    class experimental_async final :
+      public StubInterface::experimental_async_interface {
+     public:
+      void Drive(::grpc::ClientContext* context, const ::ChassisData* request, ::ChassisFeedback* response, std::function<void(::grpc::Status)>) override;
+      void Drive(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ChassisFeedback* response, std::function<void(::grpc::Status)>) override;
+     private:
+      friend class Stub;
+      explicit experimental_async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class experimental_async_interface* experimental_async() override { return &async_stub_; }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class experimental_async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::ChassisFeedback>* AsyncDriveRaw(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::RpcMethod rpcmethod_Drive_;
+    ::grpc::ClientAsyncResponseReader< ::ChassisFeedback>* PrepareAsyncDriveRaw(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_Drive_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -69,7 +103,7 @@ class ChassisService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) final override {
+    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -78,6 +112,32 @@ class ChassisService final {
     }
   };
   typedef WithAsyncMethod_Drive<Service > AsyncService;
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_Drive : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_Drive() {
+      ::grpc::Service::experimental().MarkMethodCallback(0,
+        new ::grpc::internal::CallbackUnaryHandler< ::ChassisData, ::ChassisFeedback>(
+          [this](::grpc::ServerContext* context,
+                 const ::ChassisData* request,
+                 ::ChassisFeedback* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->Drive(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_Drive() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  typedef ExperimentalWithCallbackMethod_Drive<Service > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_Drive : public BaseClass {
    private:
@@ -90,10 +150,55 @@ class ChassisService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) final override {
+    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
+  };
+  template <class BaseClass>
+  class WithRawMethod_Drive : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_Drive() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_Drive() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDrive(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_Drive : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_Drive() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(0,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->Drive(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_Drive() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void Drive(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_Drive : public BaseClass {
@@ -102,13 +207,13 @@ class ChassisService final {
    public:
     WithStreamedUnaryMethod_Drive() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::StreamedUnaryHandler< ::ChassisData, ::ChassisFeedback>(std::bind(&WithStreamedUnaryMethod_Drive<BaseClass>::StreamedDrive, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::ChassisData, ::ChassisFeedback>(std::bind(&WithStreamedUnaryMethod_Drive<BaseClass>::StreamedDrive, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_Drive() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) final override {
+    ::grpc::Status Drive(::grpc::ServerContext* context, const ::ChassisData* request, ::ChassisFeedback* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }

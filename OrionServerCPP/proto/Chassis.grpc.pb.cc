@@ -5,41 +5,57 @@
 #include "Chassis.pb.h"
 #include "Chassis.grpc.pb.h"
 
-#include <grpc++/impl/codegen/async_stream.h>
-#include <grpc++/impl/codegen/async_unary_call.h>
-#include <grpc++/impl/codegen/channel_interface.h>
-#include <grpc++/impl/codegen/client_unary_call.h>
-#include <grpc++/impl/codegen/method_handler_impl.h>
-#include <grpc++/impl/codegen/rpc_service_method.h>
-#include <grpc++/impl/codegen/service_type.h>
-#include <grpc++/impl/codegen/sync_stream.h>
+#include <functional>
+#include <grpcpp/impl/codegen/async_stream.h>
+#include <grpcpp/impl/codegen/async_unary_call.h>
+#include <grpcpp/impl/codegen/channel_interface.h>
+#include <grpcpp/impl/codegen/client_unary_call.h>
+#include <grpcpp/impl/codegen/client_callback.h>
+#include <grpcpp/impl/codegen/method_handler_impl.h>
+#include <grpcpp/impl/codegen/rpc_service_method.h>
+#include <grpcpp/impl/codegen/server_callback.h>
+#include <grpcpp/impl/codegen/service_type.h>
+#include <grpcpp/impl/codegen/sync_stream.h>
 
 static const char* ChassisService_method_names[] = {
   "/ChassisService/Drive",
 };
 
 std::unique_ptr< ChassisService::Stub> ChassisService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+  (void)options;
   std::unique_ptr< ChassisService::Stub> stub(new ChassisService::Stub(channel));
   return stub;
 }
 
 ChassisService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_Drive_(ChassisService_method_names[0], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_Drive_(ChassisService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status ChassisService::Stub::Drive(::grpc::ClientContext* context, const ::ChassisData& request, ::ChassisFeedback* response) {
-  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_Drive_, context, request, response);
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_Drive_, context, request, response);
+}
+
+void ChassisService::Stub::experimental_async::Drive(::grpc::ClientContext* context, const ::ChassisData* request, ::ChassisFeedback* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Drive_, context, request, response, std::move(f));
+}
+
+void ChassisService::Stub::experimental_async::Drive(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ChassisFeedback* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Drive_, context, request, response, std::move(f));
 }
 
 ::grpc::ClientAsyncResponseReader< ::ChassisFeedback>* ChassisService::Stub::AsyncDriveRaw(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::ChassisFeedback>(channel_.get(), cq, rpcmethod_Drive_, context, request);
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ChassisFeedback>::Create(channel_.get(), cq, rpcmethod_Drive_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::ChassisFeedback>* ChassisService::Stub::PrepareAsyncDriveRaw(::grpc::ClientContext* context, const ::ChassisData& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ChassisFeedback>::Create(channel_.get(), cq, rpcmethod_Drive_, context, request, false);
 }
 
 ChassisService::Service::Service() {
-  AddMethod(new ::grpc::RpcServiceMethod(
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
       ChassisService_method_names[0],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< ChassisService::Service, ::ChassisData, ::ChassisFeedback>(
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< ChassisService::Service, ::ChassisData, ::ChassisFeedback>(
           std::mem_fn(&ChassisService::Service::Drive), this)));
 }
 
