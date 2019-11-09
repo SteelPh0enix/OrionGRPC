@@ -1,1 +1,0 @@
-g++ -O2 -Wall -Wextra -Wpedantic -std=c++14 -o orion_server proto/Chassis.pb.cc proto/Chassis.grpc.pb.cc main.cpp
