@@ -6,19 +6,33 @@
 #include <grpc++/server_builder.h>
 #include <grpc++/server_context.h>
 
+#include <nlohmann/json.hpp>
+
+#include <SerialStream.h>
+
 #include <iostream>
 #include <memory>
+
+using json = nlohmann::json;
 
 class DriveServer final : public ChassisService::Service {
     public:
         virtual grpc::Status Drive(grpc::ServerContext* context, ChassisData const* request, ChassisFeedback* response) override {
-            std::cout << "Got ChassisData: " << request->velocity() << ", " << request->rotation() << '\n';
-            response->set_leftpower(request->velocity());
-            response->set_rightpower(request->rotation());
-            response->set_errorcode(69);
-            response->set_errordescription("nope");
+            std::cout << "Got ChassisData: V:" << request->velocity() << ", R:" << request->rotation() << '\n';
+            json outputJson;
+
+            outputJson["X"] = request->rotation();
+            outputJson["Y"] = request->velocity();
+
+            auto jsonString = outputJson.dump() + '\n';
+
+            std::cout << "Sending to chassis: " << jsonString << '\n';
+
             return grpc::Status::OK;
         }
+
+    private:
+
 };
 
 int main() {
