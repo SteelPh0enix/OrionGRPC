@@ -31,8 +31,8 @@ class DriveServer final : public ChassisService::Service {
             std::cout << "Got ChassisData: V:" << request->velocity() << ", R:" << request->rotation() << '\n';
             json outputJson;
 
-            outputJson["X"] = request->rotation();
             outputJson["Y"] = request->velocity();
+            outputJson["X"] = request->rotation();
 
             auto jsonString = outputJson.dump();
 
