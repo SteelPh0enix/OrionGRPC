@@ -59,13 +59,15 @@ class DriveServer final : public ChassisService::Service {
 };
 
 int main() {
-    std::string server_address("0.0.0.0:5000");
+    std::cout << "Remember to run this as root!\n";
+    std::string chassis_server_address("0.0.0.0:5000");
     DriveServer service(CHASSIS_SERIAL_PORT_NAME);
 
+
     grpc::ServerBuilder builder;
-    builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+    builder.AddListeningPort(chassis_server_address, grpc::InsecureServerCredentials());
     builder.RegisterService(&service);
     std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
-    std::cout << "Server listening on " << server_address << '\n';
+    std::cout << "Server listening on " << chassis_server_address << '\n';
     server->Wait();
 }

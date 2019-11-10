@@ -225,5 +225,958 @@ class ChassisService final {
   typedef WithStreamedUnaryMethod_Drive<Service > StreamedService;
 };
 
+class ArmService final {
+ public:
+  static constexpr char const* service_full_name() {
+    return "ArmService";
+  }
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    virtual ::grpc::Status RotateTurntable(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> AsyncRotateTurntable(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(AsyncRotateTurntableRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> PrepareAsyncRotateTurntable(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(PrepareAsyncRotateTurntableRaw(context, request, cq));
+    }
+    virtual ::grpc::Status MoveLowerActuator(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> AsyncMoveLowerActuator(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(AsyncMoveLowerActuatorRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> PrepareAsyncMoveLowerActuator(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(PrepareAsyncMoveLowerActuatorRaw(context, request, cq));
+    }
+    virtual ::grpc::Status MoveUpperActuator(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> AsyncMoveUpperActuator(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(AsyncMoveUpperActuatorRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> PrepareAsyncMoveUpperActuator(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(PrepareAsyncMoveUpperActuatorRaw(context, request, cq));
+    }
+    virtual ::grpc::Status RotateGrasper(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> AsyncRotateGrasper(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(AsyncRotateGrasperRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> PrepareAsyncRotateGrasper(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(PrepareAsyncRotateGrasperRaw(context, request, cq));
+    }
+    virtual ::grpc::Status MoveGrasperX(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> AsyncMoveGrasperX(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(AsyncMoveGrasperXRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> PrepareAsyncMoveGrasperX(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(PrepareAsyncMoveGrasperXRaw(context, request, cq));
+    }
+    virtual ::grpc::Status MoveGrasperY(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> AsyncMoveGrasperY(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(AsyncMoveGrasperYRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>> PrepareAsyncMoveGrasperY(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>>(PrepareAsyncMoveGrasperYRaw(context, request, cq));
+    }
+    class experimental_async_interface {
+     public:
+      virtual ~experimental_async_interface() {}
+      virtual void RotateTurntable(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RotateTurntable(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void MoveLowerActuator(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void MoveLowerActuator(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void MoveUpperActuator(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void MoveUpperActuator(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RotateGrasper(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RotateGrasper(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void MoveGrasperX(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void MoveGrasperX(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void MoveGrasperY(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void MoveGrasperY(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) = 0;
+    };
+    virtual class experimental_async_interface* experimental_async() { return nullptr; }
+  private:
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* AsyncRotateTurntableRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* PrepareAsyncRotateTurntableRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* AsyncMoveLowerActuatorRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* PrepareAsyncMoveLowerActuatorRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* AsyncMoveUpperActuatorRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* PrepareAsyncMoveUpperActuatorRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* AsyncRotateGrasperRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* PrepareAsyncRotateGrasperRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* AsyncMoveGrasperXRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* PrepareAsyncMoveGrasperXRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* AsyncMoveGrasperYRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ArmFeedback>* PrepareAsyncMoveGrasperYRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) = 0;
+  };
+  class Stub final : public StubInterface {
+   public:
+    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+    ::grpc::Status RotateTurntable(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> AsyncRotateTurntable(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(AsyncRotateTurntableRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> PrepareAsyncRotateTurntable(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(PrepareAsyncRotateTurntableRaw(context, request, cq));
+    }
+    ::grpc::Status MoveLowerActuator(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> AsyncMoveLowerActuator(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(AsyncMoveLowerActuatorRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> PrepareAsyncMoveLowerActuator(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(PrepareAsyncMoveLowerActuatorRaw(context, request, cq));
+    }
+    ::grpc::Status MoveUpperActuator(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> AsyncMoveUpperActuator(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(AsyncMoveUpperActuatorRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> PrepareAsyncMoveUpperActuator(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(PrepareAsyncMoveUpperActuatorRaw(context, request, cq));
+    }
+    ::grpc::Status RotateGrasper(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> AsyncRotateGrasper(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(AsyncRotateGrasperRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> PrepareAsyncRotateGrasper(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(PrepareAsyncRotateGrasperRaw(context, request, cq));
+    }
+    ::grpc::Status MoveGrasperX(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> AsyncMoveGrasperX(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(AsyncMoveGrasperXRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> PrepareAsyncMoveGrasperX(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(PrepareAsyncMoveGrasperXRaw(context, request, cq));
+    }
+    ::grpc::Status MoveGrasperY(::grpc::ClientContext* context, const ::MotorData& request, ::ArmFeedback* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> AsyncMoveGrasperY(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(AsyncMoveGrasperYRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>> PrepareAsyncMoveGrasperY(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ArmFeedback>>(PrepareAsyncMoveGrasperYRaw(context, request, cq));
+    }
+    class experimental_async final :
+      public StubInterface::experimental_async_interface {
+     public:
+      void RotateTurntable(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void RotateTurntable(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void MoveLowerActuator(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void MoveLowerActuator(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void MoveUpperActuator(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void MoveUpperActuator(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void RotateGrasper(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void RotateGrasper(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void MoveGrasperX(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void MoveGrasperX(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void MoveGrasperY(::grpc::ClientContext* context, const ::MotorData* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+      void MoveGrasperY(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ArmFeedback* response, std::function<void(::grpc::Status)>) override;
+     private:
+      friend class Stub;
+      explicit experimental_async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class experimental_async_interface* experimental_async() override { return &async_stub_; }
+
+   private:
+    std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class experimental_async async_stub_{this};
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* AsyncRotateTurntableRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* PrepareAsyncRotateTurntableRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* AsyncMoveLowerActuatorRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* PrepareAsyncMoveLowerActuatorRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* AsyncMoveUpperActuatorRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* PrepareAsyncMoveUpperActuatorRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* AsyncRotateGrasperRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* PrepareAsyncRotateGrasperRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* AsyncMoveGrasperXRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* PrepareAsyncMoveGrasperXRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* AsyncMoveGrasperYRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ArmFeedback>* PrepareAsyncMoveGrasperYRaw(::grpc::ClientContext* context, const ::MotorData& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_RotateTurntable_;
+    const ::grpc::internal::RpcMethod rpcmethod_MoveLowerActuator_;
+    const ::grpc::internal::RpcMethod rpcmethod_MoveUpperActuator_;
+    const ::grpc::internal::RpcMethod rpcmethod_RotateGrasper_;
+    const ::grpc::internal::RpcMethod rpcmethod_MoveGrasperX_;
+    const ::grpc::internal::RpcMethod rpcmethod_MoveGrasperY_;
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+
+  class Service : public ::grpc::Service {
+   public:
+    Service();
+    virtual ~Service();
+    virtual ::grpc::Status RotateTurntable(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response);
+    virtual ::grpc::Status MoveLowerActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response);
+    virtual ::grpc::Status MoveUpperActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response);
+    virtual ::grpc::Status RotateGrasper(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response);
+    virtual ::grpc::Status MoveGrasperX(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response);
+    virtual ::grpc::Status MoveGrasperY(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response);
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_RotateTurntable : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_RotateTurntable() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_RotateTurntable() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateTurntable(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRotateTurntable(::grpc::ServerContext* context, ::MotorData* request, ::grpc::ServerAsyncResponseWriter< ::ArmFeedback>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_MoveLowerActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_MoveLowerActuator() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_MoveLowerActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveLowerActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMoveLowerActuator(::grpc::ServerContext* context, ::MotorData* request, ::grpc::ServerAsyncResponseWriter< ::ArmFeedback>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_MoveUpperActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_MoveUpperActuator() {
+      ::grpc::Service::MarkMethodAsync(2);
+    }
+    ~WithAsyncMethod_MoveUpperActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveUpperActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMoveUpperActuator(::grpc::ServerContext* context, ::MotorData* request, ::grpc::ServerAsyncResponseWriter< ::ArmFeedback>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_RotateGrasper : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_RotateGrasper() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_RotateGrasper() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateGrasper(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRotateGrasper(::grpc::ServerContext* context, ::MotorData* request, ::grpc::ServerAsyncResponseWriter< ::ArmFeedback>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_MoveGrasperX : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_MoveGrasperX() {
+      ::grpc::Service::MarkMethodAsync(4);
+    }
+    ~WithAsyncMethod_MoveGrasperX() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperX(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMoveGrasperX(::grpc::ServerContext* context, ::MotorData* request, ::grpc::ServerAsyncResponseWriter< ::ArmFeedback>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_MoveGrasperY : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_MoveGrasperY() {
+      ::grpc::Service::MarkMethodAsync(5);
+    }
+    ~WithAsyncMethod_MoveGrasperY() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperY(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMoveGrasperY(::grpc::ServerContext* context, ::MotorData* request, ::grpc::ServerAsyncResponseWriter< ::ArmFeedback>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_RotateTurntable<WithAsyncMethod_MoveLowerActuator<WithAsyncMethod_MoveUpperActuator<WithAsyncMethod_RotateGrasper<WithAsyncMethod_MoveGrasperX<WithAsyncMethod_MoveGrasperY<Service > > > > > > AsyncService;
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_RotateTurntable : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_RotateTurntable() {
+      ::grpc::Service::experimental().MarkMethodCallback(0,
+        new ::grpc::internal::CallbackUnaryHandler< ::MotorData, ::ArmFeedback>(
+          [this](::grpc::ServerContext* context,
+                 const ::MotorData* request,
+                 ::ArmFeedback* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->RotateTurntable(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_RotateTurntable() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateTurntable(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void RotateTurntable(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_MoveLowerActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_MoveLowerActuator() {
+      ::grpc::Service::experimental().MarkMethodCallback(1,
+        new ::grpc::internal::CallbackUnaryHandler< ::MotorData, ::ArmFeedback>(
+          [this](::grpc::ServerContext* context,
+                 const ::MotorData* request,
+                 ::ArmFeedback* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->MoveLowerActuator(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_MoveLowerActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveLowerActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void MoveLowerActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_MoveUpperActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_MoveUpperActuator() {
+      ::grpc::Service::experimental().MarkMethodCallback(2,
+        new ::grpc::internal::CallbackUnaryHandler< ::MotorData, ::ArmFeedback>(
+          [this](::grpc::ServerContext* context,
+                 const ::MotorData* request,
+                 ::ArmFeedback* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->MoveUpperActuator(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_MoveUpperActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveUpperActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void MoveUpperActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_RotateGrasper : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_RotateGrasper() {
+      ::grpc::Service::experimental().MarkMethodCallback(3,
+        new ::grpc::internal::CallbackUnaryHandler< ::MotorData, ::ArmFeedback>(
+          [this](::grpc::ServerContext* context,
+                 const ::MotorData* request,
+                 ::ArmFeedback* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->RotateGrasper(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_RotateGrasper() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateGrasper(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void RotateGrasper(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_MoveGrasperX : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_MoveGrasperX() {
+      ::grpc::Service::experimental().MarkMethodCallback(4,
+        new ::grpc::internal::CallbackUnaryHandler< ::MotorData, ::ArmFeedback>(
+          [this](::grpc::ServerContext* context,
+                 const ::MotorData* request,
+                 ::ArmFeedback* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->MoveGrasperX(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_MoveGrasperX() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperX(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void MoveGrasperX(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_MoveGrasperY : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_MoveGrasperY() {
+      ::grpc::Service::experimental().MarkMethodCallback(5,
+        new ::grpc::internal::CallbackUnaryHandler< ::MotorData, ::ArmFeedback>(
+          [this](::grpc::ServerContext* context,
+                 const ::MotorData* request,
+                 ::ArmFeedback* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->MoveGrasperY(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_MoveGrasperY() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperY(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void MoveGrasperY(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  typedef ExperimentalWithCallbackMethod_RotateTurntable<ExperimentalWithCallbackMethod_MoveLowerActuator<ExperimentalWithCallbackMethod_MoveUpperActuator<ExperimentalWithCallbackMethod_RotateGrasper<ExperimentalWithCallbackMethod_MoveGrasperX<ExperimentalWithCallbackMethod_MoveGrasperY<Service > > > > > > ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_RotateTurntable : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_RotateTurntable() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_RotateTurntable() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateTurntable(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_MoveLowerActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_MoveLowerActuator() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_MoveLowerActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveLowerActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_MoveUpperActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_MoveUpperActuator() {
+      ::grpc::Service::MarkMethodGeneric(2);
+    }
+    ~WithGenericMethod_MoveUpperActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveUpperActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_RotateGrasper : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_RotateGrasper() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_RotateGrasper() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateGrasper(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_MoveGrasperX : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_MoveGrasperX() {
+      ::grpc::Service::MarkMethodGeneric(4);
+    }
+    ~WithGenericMethod_MoveGrasperX() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperX(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_MoveGrasperY : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_MoveGrasperY() {
+      ::grpc::Service::MarkMethodGeneric(5);
+    }
+    ~WithGenericMethod_MoveGrasperY() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperY(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_RotateTurntable : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_RotateTurntable() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_RotateTurntable() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateTurntable(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRotateTurntable(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_MoveLowerActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_MoveLowerActuator() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_MoveLowerActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveLowerActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMoveLowerActuator(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_MoveUpperActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_MoveUpperActuator() {
+      ::grpc::Service::MarkMethodRaw(2);
+    }
+    ~WithRawMethod_MoveUpperActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveUpperActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMoveUpperActuator(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_RotateGrasper : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_RotateGrasper() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_RotateGrasper() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateGrasper(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRotateGrasper(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_MoveGrasperX : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_MoveGrasperX() {
+      ::grpc::Service::MarkMethodRaw(4);
+    }
+    ~WithRawMethod_MoveGrasperX() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperX(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMoveGrasperX(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_MoveGrasperY : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_MoveGrasperY() {
+      ::grpc::Service::MarkMethodRaw(5);
+    }
+    ~WithRawMethod_MoveGrasperY() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperY(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMoveGrasperY(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_RotateTurntable : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_RotateTurntable() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(0,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->RotateTurntable(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_RotateTurntable() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateTurntable(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void RotateTurntable(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_MoveLowerActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_MoveLowerActuator() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(1,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->MoveLowerActuator(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_MoveLowerActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveLowerActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void MoveLowerActuator(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_MoveUpperActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_MoveUpperActuator() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(2,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->MoveUpperActuator(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_MoveUpperActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveUpperActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void MoveUpperActuator(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_RotateGrasper : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_RotateGrasper() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(3,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->RotateGrasper(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_RotateGrasper() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RotateGrasper(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void RotateGrasper(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_MoveGrasperX : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_MoveGrasperX() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(4,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->MoveGrasperX(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_MoveGrasperX() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperX(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void MoveGrasperX(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_MoveGrasperY : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_MoveGrasperY() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(5,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->MoveGrasperY(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_MoveGrasperY() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MoveGrasperY(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void MoveGrasperY(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_RotateTurntable : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_RotateTurntable() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::StreamedUnaryHandler< ::MotorData, ::ArmFeedback>(std::bind(&WithStreamedUnaryMethod_RotateTurntable<BaseClass>::StreamedRotateTurntable, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_RotateTurntable() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status RotateTurntable(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedRotateTurntable(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::MotorData,::ArmFeedback>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_MoveLowerActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_MoveLowerActuator() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::StreamedUnaryHandler< ::MotorData, ::ArmFeedback>(std::bind(&WithStreamedUnaryMethod_MoveLowerActuator<BaseClass>::StreamedMoveLowerActuator, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_MoveLowerActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status MoveLowerActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedMoveLowerActuator(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::MotorData,::ArmFeedback>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_MoveUpperActuator : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_MoveUpperActuator() {
+      ::grpc::Service::MarkMethodStreamed(2,
+        new ::grpc::internal::StreamedUnaryHandler< ::MotorData, ::ArmFeedback>(std::bind(&WithStreamedUnaryMethod_MoveUpperActuator<BaseClass>::StreamedMoveUpperActuator, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_MoveUpperActuator() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status MoveUpperActuator(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedMoveUpperActuator(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::MotorData,::ArmFeedback>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_RotateGrasper : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_RotateGrasper() {
+      ::grpc::Service::MarkMethodStreamed(3,
+        new ::grpc::internal::StreamedUnaryHandler< ::MotorData, ::ArmFeedback>(std::bind(&WithStreamedUnaryMethod_RotateGrasper<BaseClass>::StreamedRotateGrasper, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_RotateGrasper() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status RotateGrasper(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedRotateGrasper(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::MotorData,::ArmFeedback>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_MoveGrasperX : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_MoveGrasperX() {
+      ::grpc::Service::MarkMethodStreamed(4,
+        new ::grpc::internal::StreamedUnaryHandler< ::MotorData, ::ArmFeedback>(std::bind(&WithStreamedUnaryMethod_MoveGrasperX<BaseClass>::StreamedMoveGrasperX, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_MoveGrasperX() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status MoveGrasperX(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedMoveGrasperX(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::MotorData,::ArmFeedback>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_MoveGrasperY : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_MoveGrasperY() {
+      ::grpc::Service::MarkMethodStreamed(5,
+        new ::grpc::internal::StreamedUnaryHandler< ::MotorData, ::ArmFeedback>(std::bind(&WithStreamedUnaryMethod_MoveGrasperY<BaseClass>::StreamedMoveGrasperY, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_MoveGrasperY() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status MoveGrasperY(::grpc::ServerContext* context, const ::MotorData* request, ::ArmFeedback* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedMoveGrasperY(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::MotorData,::ArmFeedback>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_RotateTurntable<WithStreamedUnaryMethod_MoveLowerActuator<WithStreamedUnaryMethod_MoveUpperActuator<WithStreamedUnaryMethod_RotateGrasper<WithStreamedUnaryMethod_MoveGrasperX<WithStreamedUnaryMethod_MoveGrasperY<Service > > > > > > StreamedUnaryService;
+  typedef Service SplitStreamedService;
+  typedef WithStreamedUnaryMethod_RotateTurntable<WithStreamedUnaryMethod_MoveLowerActuator<WithStreamedUnaryMethod_MoveUpperActuator<WithStreamedUnaryMethod_RotateGrasper<WithStreamedUnaryMethod_MoveGrasperX<WithStreamedUnaryMethod_MoveGrasperY<Service > > > > > > StreamedService;
+};
+
 
 #endif  // GRPC_Chassis_2eproto__INCLUDED

@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rChassis.proto\"1\n\x0b\x43hassisData\x12\x10\n\x08velocity\x18\x01 \x01(\x01\x12\x10\n\x08rotation\x18\x02 \x01(\x01\"e\n\x0f\x43hassisFeedback\x12\x11\n\tleftPower\x18\x01 \x01(\x05\x12\x12\n\nrightPower\x18\x02 \x01(\x05\x12\x11\n\terrorCode\x18\x05 \x01(\x05\x12\x18\n\x10\x65rrorDescription\x18\x06 \x01(\t29\n\x0e\x43hassisService\x12\'\n\x05\x44rive\x12\x0c.ChassisData\x1a\x10.ChassisFeedbackb\x06proto3')
+  serialized_pb=_b('\n\rChassis.proto\"1\n\x0b\x43hassisData\x12\x10\n\x08velocity\x18\x01 \x01(\x01\x12\x10\n\x08rotation\x18\x02 \x01(\x01\"e\n\x0f\x43hassisFeedback\x12\x11\n\tleftPower\x18\x01 \x01(\x05\x12\x12\n\nrightPower\x18\x02 \x01(\x05\x12\x11\n\terrorCode\x18\x05 \x01(\x05\x12\x18\n\x10\x65rrorDescription\x18\x06 \x01(\t\":\n\x0b\x41rmFeedback\x12\x11\n\terrorCode\x18\x01 \x01(\x05\x12\x18\n\x10\x65rrorDescription\x18\x02 \x01(\t\"\x1a\n\tMotorData\x12\r\n\x05power\x18\x01 \x01(\x05\x32\x39\n\x0e\x43hassisService\x12\'\n\x05\x44rive\x12\x0c.ChassisData\x1a\x10.ChassisFeedback2\x96\x02\n\nArmService\x12+\n\x0fRotateTurntable\x12\n.MotorData\x1a\x0c.ArmFeedback\x12-\n\x11MoveLowerActuator\x12\n.MotorData\x1a\x0c.ArmFeedback\x12-\n\x11MoveUpperActuator\x12\n.MotorData\x1a\x0c.ArmFeedback\x12)\n\rRotateGrasper\x12\n.MotorData\x1a\x0c.ArmFeedback\x12(\n\x0cMoveGrasperX\x12\n.MotorData\x1a\x0c.ArmFeedback\x12(\n\x0cMoveGrasperY\x12\n.MotorData\x1a\x0c.ArmFeedbackb\x06proto3')
 )
 
 
@@ -115,8 +115,79 @@ _CHASSISFEEDBACK = _descriptor.Descriptor(
   serialized_end=169,
 )
 
+
+_ARMFEEDBACK = _descriptor.Descriptor(
+  name='ArmFeedback',
+  full_name='ArmFeedback',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='errorCode', full_name='ArmFeedback.errorCode', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='errorDescription', full_name='ArmFeedback.errorDescription', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=171,
+  serialized_end=229,
+)
+
+
+_MOTORDATA = _descriptor.Descriptor(
+  name='MotorData',
+  full_name='MotorData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='power', full_name='MotorData.power', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=231,
+  serialized_end=257,
+)
+
 DESCRIPTOR.message_types_by_name['ChassisData'] = _CHASSISDATA
 DESCRIPTOR.message_types_by_name['ChassisFeedback'] = _CHASSISFEEDBACK
+DESCRIPTOR.message_types_by_name['ArmFeedback'] = _ARMFEEDBACK
+DESCRIPTOR.message_types_by_name['MotorData'] = _MOTORDATA
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ChassisData = _reflection.GeneratedProtocolMessageType('ChassisData', (_message.Message,), {
@@ -133,6 +204,20 @@ ChassisFeedback = _reflection.GeneratedProtocolMessageType('ChassisFeedback', (_
   })
 _sym_db.RegisterMessage(ChassisFeedback)
 
+ArmFeedback = _reflection.GeneratedProtocolMessageType('ArmFeedback', (_message.Message,), {
+  'DESCRIPTOR' : _ARMFEEDBACK,
+  '__module__' : 'Chassis_pb2'
+  # @@protoc_insertion_point(class_scope:ArmFeedback)
+  })
+_sym_db.RegisterMessage(ArmFeedback)
+
+MotorData = _reflection.GeneratedProtocolMessageType('MotorData', (_message.Message,), {
+  'DESCRIPTOR' : _MOTORDATA,
+  '__module__' : 'Chassis_pb2'
+  # @@protoc_insertion_point(class_scope:MotorData)
+  })
+_sym_db.RegisterMessage(MotorData)
+
 
 
 _CHASSISSERVICE = _descriptor.ServiceDescriptor(
@@ -141,8 +226,8 @@ _CHASSISSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=171,
-  serialized_end=228,
+  serialized_start=259,
+  serialized_end=316,
   methods=[
   _descriptor.MethodDescriptor(
     name='Drive',
@@ -157,5 +242,74 @@ _CHASSISSERVICE = _descriptor.ServiceDescriptor(
 _sym_db.RegisterServiceDescriptor(_CHASSISSERVICE)
 
 DESCRIPTOR.services_by_name['ChassisService'] = _CHASSISSERVICE
+
+
+_ARMSERVICE = _descriptor.ServiceDescriptor(
+  name='ArmService',
+  full_name='ArmService',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=None,
+  serialized_start=319,
+  serialized_end=597,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='RotateTurntable',
+    full_name='ArmService.RotateTurntable',
+    index=0,
+    containing_service=None,
+    input_type=_MOTORDATA,
+    output_type=_ARMFEEDBACK,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='MoveLowerActuator',
+    full_name='ArmService.MoveLowerActuator',
+    index=1,
+    containing_service=None,
+    input_type=_MOTORDATA,
+    output_type=_ARMFEEDBACK,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='MoveUpperActuator',
+    full_name='ArmService.MoveUpperActuator',
+    index=2,
+    containing_service=None,
+    input_type=_MOTORDATA,
+    output_type=_ARMFEEDBACK,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RotateGrasper',
+    full_name='ArmService.RotateGrasper',
+    index=3,
+    containing_service=None,
+    input_type=_MOTORDATA,
+    output_type=_ARMFEEDBACK,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='MoveGrasperX',
+    full_name='ArmService.MoveGrasperX',
+    index=4,
+    containing_service=None,
+    input_type=_MOTORDATA,
+    output_type=_ARMFEEDBACK,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='MoveGrasperY',
+    full_name='ArmService.MoveGrasperY',
+    index=5,
+    containing_service=None,
+    input_type=_MOTORDATA,
+    output_type=_ARMFEEDBACK,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_ARMSERVICE)
+
+DESCRIPTOR.services_by_name['ArmService'] = _ARMSERVICE
 
 # @@protoc_insertion_point(module_scope)

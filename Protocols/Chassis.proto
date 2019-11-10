@@ -4,6 +4,15 @@ service ChassisService {
     rpc Drive(ChassisData) returns (ChassisFeedback);
 }
 
+service ArmService {
+    rpc RotateTurntable(MotorData) returns (ArmFeedback);
+    rpc MoveLowerActuator(MotorData) returns (ArmFeedback);
+    rpc MoveUpperActuator(MotorData) returns (ArmFeedback);
+    rpc RotateGrasper(MotorData) returns (ArmFeedback);
+    rpc MoveGrasperX(MotorData) returns (ArmFeedback);
+    rpc MoveGrasperY(MotorData) returns (ArmFeedback);
+}
+
 message ChassisData {
     double velocity = 1;
     double rotation = 2;
@@ -14,4 +23,13 @@ message ChassisFeedback {
     int32 rightPower = 2;
     int32 errorCode = 5;
     string errorDescription = 6;
+}
+
+message ArmFeedback {
+    int32 errorCode = 1;
+    string errorDescription = 2;
+}
+
+message MotorData {
+    int32 power = 1;
 }

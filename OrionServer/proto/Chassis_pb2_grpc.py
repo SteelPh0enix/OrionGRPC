@@ -44,3 +44,130 @@ def add_ChassisServiceServicer_to_server(servicer, server):
   generic_handler = grpc.method_handlers_generic_handler(
       'ChassisService', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))
+
+
+class ArmServiceStub(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def __init__(self, channel):
+    """Constructor.
+
+    Args:
+      channel: A grpc.Channel.
+    """
+    self.RotateTurntable = channel.unary_unary(
+        '/ArmService/RotateTurntable',
+        request_serializer=Chassis__pb2.MotorData.SerializeToString,
+        response_deserializer=Chassis__pb2.ArmFeedback.FromString,
+        )
+    self.MoveLowerActuator = channel.unary_unary(
+        '/ArmService/MoveLowerActuator',
+        request_serializer=Chassis__pb2.MotorData.SerializeToString,
+        response_deserializer=Chassis__pb2.ArmFeedback.FromString,
+        )
+    self.MoveUpperActuator = channel.unary_unary(
+        '/ArmService/MoveUpperActuator',
+        request_serializer=Chassis__pb2.MotorData.SerializeToString,
+        response_deserializer=Chassis__pb2.ArmFeedback.FromString,
+        )
+    self.RotateGrasper = channel.unary_unary(
+        '/ArmService/RotateGrasper',
+        request_serializer=Chassis__pb2.MotorData.SerializeToString,
+        response_deserializer=Chassis__pb2.ArmFeedback.FromString,
+        )
+    self.MoveGrasperX = channel.unary_unary(
+        '/ArmService/MoveGrasperX',
+        request_serializer=Chassis__pb2.MotorData.SerializeToString,
+        response_deserializer=Chassis__pb2.ArmFeedback.FromString,
+        )
+    self.MoveGrasperY = channel.unary_unary(
+        '/ArmService/MoveGrasperY',
+        request_serializer=Chassis__pb2.MotorData.SerializeToString,
+        response_deserializer=Chassis__pb2.ArmFeedback.FromString,
+        )
+
+
+class ArmServiceServicer(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def RotateTurntable(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def MoveLowerActuator(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def MoveUpperActuator(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def RotateGrasper(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def MoveGrasperX(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def MoveGrasperY(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+
+def add_ArmServiceServicer_to_server(servicer, server):
+  rpc_method_handlers = {
+      'RotateTurntable': grpc.unary_unary_rpc_method_handler(
+          servicer.RotateTurntable,
+          request_deserializer=Chassis__pb2.MotorData.FromString,
+          response_serializer=Chassis__pb2.ArmFeedback.SerializeToString,
+      ),
+      'MoveLowerActuator': grpc.unary_unary_rpc_method_handler(
+          servicer.MoveLowerActuator,
+          request_deserializer=Chassis__pb2.MotorData.FromString,
+          response_serializer=Chassis__pb2.ArmFeedback.SerializeToString,
+      ),
+      'MoveUpperActuator': grpc.unary_unary_rpc_method_handler(
+          servicer.MoveUpperActuator,
+          request_deserializer=Chassis__pb2.MotorData.FromString,
+          response_serializer=Chassis__pb2.ArmFeedback.SerializeToString,
+      ),
+      'RotateGrasper': grpc.unary_unary_rpc_method_handler(
+          servicer.RotateGrasper,
+          request_deserializer=Chassis__pb2.MotorData.FromString,
+          response_serializer=Chassis__pb2.ArmFeedback.SerializeToString,
+      ),
+      'MoveGrasperX': grpc.unary_unary_rpc_method_handler(
+          servicer.MoveGrasperX,
+          request_deserializer=Chassis__pb2.MotorData.FromString,
+          response_serializer=Chassis__pb2.ArmFeedback.SerializeToString,
+      ),
+      'MoveGrasperY': grpc.unary_unary_rpc_method_handler(
+          servicer.MoveGrasperY,
+          request_deserializer=Chassis__pb2.MotorData.FromString,
+          response_serializer=Chassis__pb2.ArmFeedback.SerializeToString,
+      ),
+  }
+  generic_handler = grpc.method_handlers_generic_handler(
+      'ArmService', rpc_method_handlers)
+  server.add_generic_rpc_handlers((generic_handler,))

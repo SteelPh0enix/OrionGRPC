@@ -47,22 +47,30 @@ struct TableStruct_Chassis_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[2]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[4]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Chassis_2eproto;
+class ArmFeedback;
+class ArmFeedbackDefaultTypeInternal;
+extern ArmFeedbackDefaultTypeInternal _ArmFeedback_default_instance_;
 class ChassisData;
 class ChassisDataDefaultTypeInternal;
 extern ChassisDataDefaultTypeInternal _ChassisData_default_instance_;
 class ChassisFeedback;
 class ChassisFeedbackDefaultTypeInternal;
 extern ChassisFeedbackDefaultTypeInternal _ChassisFeedback_default_instance_;
+class MotorData;
+class MotorDataDefaultTypeInternal;
+extern MotorDataDefaultTypeInternal _MotorData_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::ArmFeedback* Arena::CreateMaybeMessage<::ArmFeedback>(Arena*);
 template<> ::ChassisData* Arena::CreateMaybeMessage<::ChassisData>(Arena*);
 template<> ::ChassisFeedback* Arena::CreateMaybeMessage<::ChassisFeedback>(Arena*);
+template<> ::MotorData* Arena::CreateMaybeMessage<::MotorData>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 // ===================================================================
@@ -372,6 +380,280 @@ class ChassisFeedback :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Chassis_2eproto;
 };
+// -------------------------------------------------------------------
+
+class ArmFeedback :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ArmFeedback) */ {
+ public:
+  ArmFeedback();
+  virtual ~ArmFeedback();
+
+  ArmFeedback(const ArmFeedback& from);
+  ArmFeedback(ArmFeedback&& from) noexcept
+    : ArmFeedback() {
+    *this = ::std::move(from);
+  }
+
+  inline ArmFeedback& operator=(const ArmFeedback& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ArmFeedback& operator=(ArmFeedback&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ArmFeedback& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ArmFeedback* internal_default_instance() {
+    return reinterpret_cast<const ArmFeedback*>(
+               &_ArmFeedback_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(ArmFeedback& a, ArmFeedback& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ArmFeedback* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ArmFeedback* New() const final {
+    return CreateMaybeMessage<ArmFeedback>(nullptr);
+  }
+
+  ArmFeedback* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ArmFeedback>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ArmFeedback& from);
+  void MergeFrom(const ArmFeedback& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ArmFeedback* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ArmFeedback";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Chassis_2eproto);
+    return ::descriptor_table_Chassis_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kErrorDescriptionFieldNumber = 2,
+    kErrorCodeFieldNumber = 1,
+  };
+  // string errorDescription = 2;
+  void clear_errordescription();
+  const std::string& errordescription() const;
+  void set_errordescription(const std::string& value);
+  void set_errordescription(std::string&& value);
+  void set_errordescription(const char* value);
+  void set_errordescription(const char* value, size_t size);
+  std::string* mutable_errordescription();
+  std::string* release_errordescription();
+  void set_allocated_errordescription(std::string* errordescription);
+  private:
+  const std::string& _internal_errordescription() const;
+  void _internal_set_errordescription(const std::string& value);
+  std::string* _internal_mutable_errordescription();
+  public:
+
+  // int32 errorCode = 1;
+  void clear_errorcode();
+  ::PROTOBUF_NAMESPACE_ID::int32 errorcode() const;
+  void set_errorcode(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_errorcode() const;
+  void _internal_set_errorcode(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:ArmFeedback)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errordescription_;
+  ::PROTOBUF_NAMESPACE_ID::int32 errorcode_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Chassis_2eproto;
+};
+// -------------------------------------------------------------------
+
+class MotorData :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MotorData) */ {
+ public:
+  MotorData();
+  virtual ~MotorData();
+
+  MotorData(const MotorData& from);
+  MotorData(MotorData&& from) noexcept
+    : MotorData() {
+    *this = ::std::move(from);
+  }
+
+  inline MotorData& operator=(const MotorData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MotorData& operator=(MotorData&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const MotorData& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const MotorData* internal_default_instance() {
+    return reinterpret_cast<const MotorData*>(
+               &_MotorData_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(MotorData& a, MotorData& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MotorData* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MotorData* New() const final {
+    return CreateMaybeMessage<MotorData>(nullptr);
+  }
+
+  MotorData* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<MotorData>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const MotorData& from);
+  void MergeFrom(const MotorData& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MotorData* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MotorData";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Chassis_2eproto);
+    return ::descriptor_table_Chassis_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPowerFieldNumber = 1,
+  };
+  // int32 power = 1;
+  void clear_power();
+  ::PROTOBUF_NAMESPACE_ID::int32 power() const;
+  void set_power(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_power() const;
+  void _internal_set_power(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:MotorData)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::int32 power_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Chassis_2eproto;
+};
 // ===================================================================
 
 
@@ -547,9 +829,121 @@ inline void ChassisFeedback::set_allocated_errordescription(std::string* errorde
   // @@protoc_insertion_point(field_set_allocated:ChassisFeedback.errorDescription)
 }
 
+// -------------------------------------------------------------------
+
+// ArmFeedback
+
+// int32 errorCode = 1;
+inline void ArmFeedback::clear_errorcode() {
+  errorcode_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ArmFeedback::_internal_errorcode() const {
+  return errorcode_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ArmFeedback::errorcode() const {
+  // @@protoc_insertion_point(field_get:ArmFeedback.errorCode)
+  return _internal_errorcode();
+}
+inline void ArmFeedback::_internal_set_errorcode(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  errorcode_ = value;
+}
+inline void ArmFeedback::set_errorcode(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_errorcode(value);
+  // @@protoc_insertion_point(field_set:ArmFeedback.errorCode)
+}
+
+// string errorDescription = 2;
+inline void ArmFeedback::clear_errordescription() {
+  errordescription_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ArmFeedback::errordescription() const {
+  // @@protoc_insertion_point(field_get:ArmFeedback.errorDescription)
+  return _internal_errordescription();
+}
+inline void ArmFeedback::set_errordescription(const std::string& value) {
+  _internal_set_errordescription(value);
+  // @@protoc_insertion_point(field_set:ArmFeedback.errorDescription)
+}
+inline std::string* ArmFeedback::mutable_errordescription() {
+  // @@protoc_insertion_point(field_mutable:ArmFeedback.errorDescription)
+  return _internal_mutable_errordescription();
+}
+inline const std::string& ArmFeedback::_internal_errordescription() const {
+  return errordescription_.GetNoArena();
+}
+inline void ArmFeedback::_internal_set_errordescription(const std::string& value) {
+  
+  errordescription_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ArmFeedback::set_errordescription(std::string&& value) {
+  
+  errordescription_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ArmFeedback.errorDescription)
+}
+inline void ArmFeedback::set_errordescription(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  errordescription_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ArmFeedback.errorDescription)
+}
+inline void ArmFeedback::set_errordescription(const char* value, size_t size) {
+  
+  errordescription_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ArmFeedback.errorDescription)
+}
+inline std::string* ArmFeedback::_internal_mutable_errordescription() {
+  
+  return errordescription_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ArmFeedback::release_errordescription() {
+  // @@protoc_insertion_point(field_release:ArmFeedback.errorDescription)
+  
+  return errordescription_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ArmFeedback::set_allocated_errordescription(std::string* errordescription) {
+  if (errordescription != nullptr) {
+    
+  } else {
+    
+  }
+  errordescription_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), errordescription);
+  // @@protoc_insertion_point(field_set_allocated:ArmFeedback.errorDescription)
+}
+
+// -------------------------------------------------------------------
+
+// MotorData
+
+// int32 power = 1;
+inline void MotorData::clear_power() {
+  power_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 MotorData::_internal_power() const {
+  return power_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 MotorData::power() const {
+  // @@protoc_insertion_point(field_get:MotorData.power)
+  return _internal_power();
+}
+inline void MotorData::_internal_set_power(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  power_ = value;
+}
+inline void MotorData::set_power(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_power(value);
+  // @@protoc_insertion_point(field_set:MotorData.power)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 
