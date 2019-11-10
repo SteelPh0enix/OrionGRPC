@@ -14,7 +14,7 @@
 #include <memory>
 
 using json = nlohmann::json;
-std::string const ARM_SERIAL_PORT_NAME{"/dev/ttyACM0"};
+std::string const ARM_SERIAL_PORT_NAME{"/dev/ttyACM1"};
 
 class ArmMovementService final : public ArmService::Service {
     public:
@@ -27,7 +27,6 @@ class ArmMovementService final : public ArmService::Service {
         }
 
         virtual grpc::Status RotateTurntable(grpc::ServerContext* context, MotorData const* request, ArmFeedback* response) override {
-            std::cout << "Rotating arm <" << request->power() << ">\n";
             json armJson{{"TRT", request->power()}};   
             std::cout << "JSON: " << armJson.dump() << '\n';
             armStream << armJson.dump() << '\n';
@@ -42,6 +41,80 @@ class ArmMovementService final : public ArmService::Service {
             return grpc::Status::OK;
         }
 
+        virtual grpc::Status MoveLowerActuator(grpc::ServerContext* context, MotorData const* request, ArmFeedback* response) override {
+            json armJson{{"LAC", request->power()}};   
+            std::cout << "JSON: " << armJson.dump() << '\n';
+            armStream << armJson.dump() << '\n';
+
+            std::string feedbackString{};
+            std::getline(armStream, feedbackString);
+
+            auto feedbackJson = json::parse(feedbackString);
+            response->set_errorcode(feedbackJson["ErrorCode"]);
+            response->set_errordescription(feedbackJson["ErrorDescription"]);
+
+            return grpc::Status::OK;
+        }
+
+        virtual grpc::Status MoveUpperActuator(grpc::ServerContext* context, MotorData const* request, ArmFeedback* response) override {
+            json armJson{{"UAC", request->power()}};   
+            std::cout << "JSON: " << armJson.dump() << '\n';
+            armStream << armJson.dump() << '\n';
+
+            std::string feedbackString{};
+            std::getline(armStream, feedbackString);
+
+            auto feedbackJson = json::parse(feedbackString);
+            response->set_errorcode(feedbackJson["ErrorCode"]);
+            response->set_errordescription(feedbackJson["ErrorDescription"]);
+
+            return grpc::Status::OK;
+        }
+
+        virtual grpc::Status RotateGrasper(grpc::ServerContext* context, MotorData const* request, ArmFeedback* response) override {
+            json armJson{{"GRPR", request->power()}};   
+            std::cout << "JSON: " << armJson.dump() << '\n';
+            armStream << armJson.dump() << '\n';
+
+            std::string feedbackString{};
+            std::getline(armStream, feedbackString);
+
+            auto feedbackJson = json::parse(feedbackString);
+            response->set_errorcode(feedbackJson["ErrorCode"]);
+            response->set_errordescription(feedbackJson["ErrorDescription"]);
+
+            return grpc::Status::OK;
+        }
+
+        virtual grpc::Status MoveGrasperX(grpc::ServerContext* context, MotorData const* request, ArmFeedback* response) override {
+            json armJson{{"GRPX", request->power()}};   
+            std::cout << "JSON: " << armJson.dump() << '\n';
+            armStream << armJson.dump() << '\n';
+
+            std::string feedbackString{};
+            std::getline(armStream, feedbackString);
+
+            auto feedbackJson = json::parse(feedbackString);
+            response->set_errorcode(feedbackJson["ErrorCode"]);
+            response->set_errordescription(feedbackJson["ErrorDescription"]);
+
+            return grpc::Status::OK;
+        }
+
+        virtual grpc::Status MoveGrasperY(grpc::ServerContext* context, MotorData const* request, ArmFeedback* response) override {
+            json armJson{{"GRPY", request->power()}};   
+            std::cout << "JSON: " << armJson.dump() << '\n';
+            armStream << armJson.dump() << '\n';
+
+            std::string feedbackString{};
+            std::getline(armStream, feedbackString);
+
+            auto feedbackJson = json::parse(feedbackString);
+            response->set_errorcode(feedbackJson["ErrorCode"]);
+            response->set_errordescription(feedbackJson["ErrorDescription"]);
+
+            return grpc::Status::OK;
+        }
     private:
         LibSerial::SerialStream armStream;
 };

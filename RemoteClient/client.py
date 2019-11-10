@@ -55,11 +55,37 @@ def make_keybinds():
     keyboard.on_press_key('d', rotate_right)
     keyboard.on_release_key('d', stop_chassis)
 
-def calculate_value(val):
+
+def calculate_chassis_value(val):
     return ((val - 128) / 128) * MAX_POWER
 
-chassis_channel = grpc.insecure_channel('{0}:{1}'.format(GRPC_SERVER_IP, GRPC_SERVER_IP))
-arm_channel = grpc.insecure_channel('{0}:{1}'.format(GRPC_SERVER_IP, GRPC_ARM_SERVER_PORT))
+
+def calculate_arm_value(val):
+    return (val - 128) * 2
+
+
+def rotate_arm(val):
+    print(GRPC_ARM_STUB.RotateTurntable(MotorData(power=-val)))
+
+def move_lower_act(val):
+    print(GRPC_ARM_STUB.MoveLowerActuator(MotorData(power=val)))
+
+def move_upper_act(val):
+    print(GRPC_ARM_STUB.MoveUpperActuator(MotorData(power=val)))
+
+def rotate_grasper(val):
+    print(GRPC_ARM_STUB.RotateGrasper(MotorData(power=val)))
+
+def move_grasper_x(val):
+    print(GRPC_ARM_STUB.MoveGrasperX(MotorData(power=val)))
+
+def move_grasper_y(val):
+    print(GRPC_ARM_STUB.MoveGrasperY(MotorData(power=val)))
+
+chassis_channel = grpc.insecure_channel(
+    '{0}:{1}'.format(GRPC_SERVER_IP, GRPC_SERVER_PORT))
+arm_channel = grpc.insecure_channel(
+    '{0}:{1}'.format(GRPC_SERVER_IP, GRPC_ARM_SERVER_PORT))
 GRPC_CHASSIS_STUB = ChassisServiceStub(chassis_channel)
 GRPC_ARM_STUB = ArmServiceStub(arm_channel)
 last_x = 0.0
@@ -67,12 +93,37 @@ last_y = 0.0
 while True:
     events = get_gamepad()
     for event in events:
-       print(event.ev_type, event.code, event.state)
-       if event.code == 'ABS_Y':
-            print("Y: ", -calculate_value(event.state))
-            last_y = -calculate_value(event.state)
-       elif event.code == 'ABS_X':
-            print("X: ", calculate_value(event.state))
-            last_x = calculate_value(event.state)
-       drive(last_y, last_x)
-
+        print(event.ev_type, event.code, event.state)
+        if event.code == 'ABS_Y':
+            print("Y: ", -calculate_chassis_value(event.state))
+            last_y = -calculate_chassis_value(event.state)
+            drive(last_y, last_x)
+        elif event.code == 'ABS_X':
+            print("X: ", calculate_chassis_value(event.state))
+            last_x = calculate_chassis_value(event.state)
+            drive(last_y, last_x)
+        elif event.code == 'ABS_RZ':
+            print("TRT: ", calculate_arm_value(event.state))
+            rotate_arm(calculate_arm_value(event.state))
+        elif event.code == 'ABS_Z':
+            print("LAA: ", calculate_arm_value(event.state))
+            move_lower_act(calculate_arm_value(event.state))
+        elif event.code == 'ABS_HAT0Y':
+            print("UAA: ", -(255 * event.state))
+            move_upper_act(-(255 * event.state))
+        elif event.code == 'ABS_HAT0X':
+            print("RTG: ", 255 * event.state)
+            rotate_grasper(255 * event.state)
+        elif event.code == 'BTN_THUMB':
+            print("GRPY: ", 255 * event.state)
+            move_grasper_y(255 * event.state)
+        elif event.code == 'BTN_THUMB2':
+            print("GRPY: ", -255 * event.state)
+            move_grasper_y(-255 * event.state)
+        elif event.code == 'BTN_TOP':
+            print("GRPX: ", 255 * event.state)
+            move_grasper_x(255 * event.state)
+        elif event.code == 'BTN_TRIGGER':
+            print("GRPX: ", -255 * event.state)
+            move_grasper_x(-255 * event.state)
+        
