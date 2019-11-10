@@ -1,6 +1,6 @@
 import grpc
-from proto.Chassis_pb2 import ChassisData, ChassisFeedback
-from proto.Chassis_pb2_grpc import ChassisServiceStub
+from proto.Chassis_pb2 import ChassisData, ChassisFeedback, MotorData, ArmFeedback
+from proto.Chassis_pb2_grpc import ChassisServiceStub, ArmServiceStub
 from time import sleep
 from inputs import get_gamepad, devices
 import keyboard
@@ -8,7 +8,9 @@ import keyboard
 
 GRPC_SERVER_IP = '192.168.43.94'
 GRPC_SERVER_PORT = '5000'
-GRPC_STUB = None
+GRPC_ARM_SERVER_PORT = '5001'
+GRPC_CHASSIS_STUB = None
+GRPC_ARM_STUB = None
 MAX_POWER = 150
 
 
@@ -20,7 +22,7 @@ def test_comms(stub):
 
 
 def drive(vel, rot):
-    print(GRPC_STUB.Drive(ChassisData(velocity=vel, rotation=rot)))
+    print(GRPC_CHASSIS_STUB.Drive(ChassisData(velocity=vel, rotation=rot)))
 
 
 def drive_forward(d):
@@ -56,21 +58,21 @@ def make_keybinds():
 def calculate_value(val):
     return ((val - 128) / 128) * MAX_POWER
 
-with grpc.insecure_channel('{0}:{1}'.format(GRPC_SERVER_IP, GRPC_SERVER_PORT)) as channel:
-    GRPC_STUB = ChassisServiceStub(channel)
-    last_x = 0.0
-    last_y = 0.0
-    while True:
-        events = get_gamepad()
-        for event in events:
-            # print(event.ev_type, event.code, event.state)
-            if event.code == 'ABS_Y':
-                print("Y: ", -calculate_value(event.state))
-                last_y = -calculate_value(event.state)
-            elif event.code == 'ABS_X':
-                print("X: ", calculate_value(event.state))
-                last_x = calculate_value(event.state)
-            drive(last_y, last_x)
+chassis_channel = grpc.insecure_channel('{0}:{1}'.format(GRPC_SERVER_IP, GRPC_SERVER_IP))
+arm_channel = grpc.insecure_channel('{0}:{1}'.format(GRPC_SERVER_IP, GRPC_ARM_SERVER_PORT))
+GRPC_CHASSIS_STUB = ChassisServiceStub(chassis_channel)
+GRPC_ARM_STUB = ArmServiceStub(arm_channel)
+last_x = 0.0
+last_y = 0.0
+while True:
+    events = get_gamepad()
+    for event in events:
+       print(event.ev_type, event.code, event.state)
+       if event.code == 'ABS_Y':
+            print("Y: ", -calculate_value(event.state))
+            last_y = -calculate_value(event.state)
+       elif event.code == 'ABS_X':
+            print("X: ", calculate_value(event.state))
+            last_x = calculate_value(event.state)
+       drive(last_y, last_x)
 
-    # make_keybinds()
-    # keyboard.wait()
