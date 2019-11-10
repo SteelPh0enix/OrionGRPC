@@ -9,7 +9,7 @@ import keyboard
 GRPC_SERVER_IP = '192.168.43.94'
 GRPC_SERVER_PORT = '5000'
 GRPC_STUB = None
-CHASSIS_MAX_POWER = 150
+MAX_POWER = 150
 
 
 def test_comms(stub):
@@ -24,19 +24,19 @@ def drive(vel, rot):
 
 
 def drive_forward(d):
-    drive(CHASSIS_MAX_POWER, 0)
+    drive(MAX_POWER, 0)
 
 
 def drive_backward(d):
-    drive(-CHASSIS_MAX_POWER, 0)
+    drive(-MAX_POWER, 0)
 
 
 def rotate_left(d):
-    drive(0, -CHASSIS_MAX_POWER)
+    drive(0, -MAX_POWER)
 
 
 def rotate_right(d):
-    drive(0, CHASSIS_MAX_POWER)
+    drive(0, MAX_POWER)
 
 
 def stop_chassis(d):
@@ -53,12 +53,24 @@ def make_keybinds():
     keyboard.on_press_key('d', rotate_right)
     keyboard.on_release_key('d', stop_chassis)
 
+def calculate_value(val):
+    return ((val - 128) / 128) * MAX_POWER
 
 with grpc.insecure_channel('{0}:{1}'.format(GRPC_SERVER_IP, GRPC_SERVER_PORT)) as channel:
     GRPC_STUB = ChassisServiceStub(channel)
+    last_x = 0.0
+    last_y = 0.0
     while True:
         events = get_gamepad()
         for event in events:
-            print(event)
+            # print(event.ev_type, event.code, event.state)
+            if event.code == 'ABS_Y':
+                print("Y: ", -calculate_value(event.state))
+                last_y = -calculate_value(event.state)
+            elif event.code == 'ABS_X':
+                print("X: ", calculate_value(event.state))
+                last_x = calculate_value(event.state)
+            drive(last_y, last_x)
+
     # make_keybinds()
     # keyboard.wait()
